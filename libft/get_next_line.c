@@ -6,7 +6,7 @@
 /*   By: nahmed-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/27 16:20:44 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/01/08 22:47:40 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/14 01:50:21 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ int			get_next_line(int const fd, char **line)
 	char			*tmp;
 
 	buffer = ft_strnew(BUFF_SIZE);
-	if (fd < 0 || line == NULL || buffer == NULL || BUFF_SIZE < 1)
-		return (-1);
+	if (fd < 1 || line == NULL || buffer == NULL || BUFF_SIZE < 1)
+		return (1);
 	if (save == NULL)
 		save = ft_strnew(1);
 	if ((ret = get_line(fd, buffer, save)) == -1)

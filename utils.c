@@ -1,33 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/03/13 19:03:42 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/14 00:06:39 by nahmed-m         ###   ########.fr       */
+/*   Created: 2016/03/14 00:05:43 by nahmed-m          #+#    #+#             */
+/*   Updated: 2016/03/14 00:08:49 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef MINISHELL_H
-# define MINISHELL_H
-# include "libft/includes/libft.h"
-# include <stdlib.h>
-# include <unistd.h>
 
-typedef struct s_env
+#include "minishell.h"
+
+void error(char *str, t_env *e)
 {
-	char *path;
-	char error;
-}				t_env;
-
-/*
-** Parser
-*/
-char	*get_env(char **env);
-
-/*
-** Utils
-*/
-void	error(char *str, t_env *e);
-#endif
+	ft_putstr_fd(str, 2);
+	e->error = 1;
+}
