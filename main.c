@@ -6,21 +6,30 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 19:03:33 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/15 12:01:06 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/15 19:30:03 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static void reconstruct_env(t_env *e, char **env)
+{
+	e->args = NULL;
+	e->path = get_env(env);
+	e->nbarg = 0;
+	e->cmd = NULL;
+	e->nbrpath = 0;
+}
+
 char *get_env(char **env)
 {
 	int		i;
-
 	i = 0;
+
 	while (env[i])
 	{
-		if (ft_strnstr(env[i], "PATH=", 5) != NULL)
-			return (env[i]);
+		if ((env[i] = ft_strnstr(env[i], "PATH=", 5)) != NULL)
+			return (ft_strsplit(env[i], '=')[1]);
 		i++;
 	}
 	return (NULL);
@@ -28,21 +37,24 @@ char *get_env(char **env)
 
 int main(int ac, char **argv, char **env)
 {
-	char *buffer;
-	t_env e;
-	ac++;
-	argv++;
-	ft_memset(&e, 0, sizeof(e));
-	e.path = ft_strdup(get_env(env));
+	char	*buffer;
+	t_env	e;
+	char	**environ;
+
+	//ft_memset(&e, 0, sizeof(e));
+	//e.path = get_env(env);
+	//e.args = NULL;
+	environ = ft_array_str_cpy(env, environ, 20);
+	e.path = get_env(env);
 	while (42)
 	{
 		e.error == 0 ? ft_printf("🚀  > ") : ft_printf("💥  > ");
-		ft_memset(&e, 0, sizeof(e));
 		get_next_line(0, &buffer);
 		parse_user(buffer, &e);
 		if (e.nbarg > 0)
-			cmd(&e, env);
+			cmd(&e, environ);
 		free(buffer);
+	//	reconstruct_env(&e, env);
 	}
 	return (0);
 }

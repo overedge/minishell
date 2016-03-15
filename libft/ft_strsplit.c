@@ -6,7 +6,7 @@
 /*   By: nahmed-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 04:26:36 by nahmed-m          #+#    #+#             */
-/*   Updated: 2015/12/03 01:21:07 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/15 14:28:42 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int		ft_strlen_char(const char *s, char c)
 	int		i;
 
 	i = 0;
-	while (*s != c && *s != '\0')
+	while ((*s != c || (*s != c && c == ' ' && *s == '\t')) && *s != '\0')
 	{
 		i++;
 		s++;
@@ -35,7 +35,7 @@ static int		ft_count_part(const char *s, char c)
 	instring = 0;
 	while (*s != '\0')
 	{
-		if (instring == 1 && *s == c)
+		if (instring == 1 && (*s == c ||(c == ' ' && *s == '\t')))
 			instring = 0;
 		if (instring == 0 && *s != c)
 		{
@@ -60,7 +60,7 @@ char			**ft_strsplit(char const *s, char c)
 		return (NULL);
 	while (nb_word--)
 	{
-		while (*s == c && *s != '\0')
+		while ((*s == c || (c == ' ' && *s == '\t')) && *s != '\0')
 			s++;
 		t[index] = \
 		ft_strsub((const char *)s, 0, ft_strlen_char((const char *)s, c));

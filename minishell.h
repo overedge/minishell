@@ -6,7 +6,7 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 19:03:42 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/15 11:05:44 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/15 18:53:30 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -34,7 +34,9 @@ void	parse_user(char *buffer, t_env *e);
 /*
 ** Utils
 */
-void	error(char *str, t_env *e);
+void	error(char *filename, char *str, t_env *e);
+char	**ft_array_str_cpy(char **src, char **dest, int size);
+char	*cjoin(char *tmp, char *tmp2);
 /*
 **	CLI
 */
