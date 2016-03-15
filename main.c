@@ -6,7 +6,7 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 19:03:33 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/14 02:14:09 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/15 12:01:06 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,15 @@ int main(int ac, char **argv, char **env)
 	ac++;
 	argv++;
 	ft_memset(&e, 0, sizeof(e));
-	e.path = get_env(env);
+	e.path = ft_strdup(get_env(env));
 	while (42)
 	{
 		e.error == 0 ? ft_printf("🚀  > ") : ft_printf("💥  > ");
+		ft_memset(&e, 0, sizeof(e));
 		get_next_line(0, &buffer);
-		execve(ft_strsplit(buffer, ' ')[0], ft_strsplit(buffer, ' '), env);
-		ft_printf("%s\n", buffer);
+		parse_user(buffer, &e);
+		if (e.nbarg > 0)
+			cmd(&e, env);
 		free(buffer);
 	}
 	return (0);
