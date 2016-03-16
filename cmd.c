@@ -6,7 +6,7 @@
 /*   By: nahmed-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 10:49:43 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/16 01:58:48 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/16 15:30:02 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ void	cmd(t_env *e, char **env)
 			}
 			i++;
 		}
-	if (i == e->nbrpath)
-		error(e->cmd, "minishell : command not found: ", e);
+		if (i == e->nbrpath)
+			error(e->cmd, "minishell : command not found: ", e);
+		exit(EXIT_SUCCESS);
 	}
 	else
 		wait(NULL);

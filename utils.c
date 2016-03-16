@@ -6,7 +6,7 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 00:05:43 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/15 19:04:12 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/16 15:06:59 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,15 @@ void error(char *filename, char *str, t_env *e)
 	}
 }
 
-char **ft_array_str_cpy(char **src, char **dest, int size)
+char **ft_array_str_cpy(char **src, char **dest)
 {
 	int		i;
+	int		size;
 
+	size = 0;
 	i = 0;
+	while (src[size])
+		size++;
 	dest = (char**)malloc(sizeof(char*) * size + 1);
 	while (i < size)
 	{

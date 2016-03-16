@@ -6,20 +6,11 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 19:03:33 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/16 02:05:24 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/16 15:42:00 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void reconstruct_env(t_env *e, char **env)
-{
-	e->args = NULL;
-	e->path = get_env(env);
-	e->nbarg = 0;
-	e->cmd = NULL;
-	e->nbrpath = 0;
-}
 
 char *get_env(char **env)
 {
@@ -35,27 +26,15 @@ char *get_env(char **env)
 	return (NULL);
 }
 
-static int get_env_size(char **env)
-{
-	int		i;
-
-	i = 0;
-	while (env[i])
-		i++;
-	return (i);
-}
-
 int main(int ac, char **argv, char **env)
 {
 	char	*buffer;
 	t_env	e;
-	char	**environ;
+	char	**environ = NULL;
 
 	ft_memset(&e, 0, sizeof(e));
-	//e.path = get_env(env);
-	//e.args = NULL;
-	environ = ft_array_str_cpy(env, environ, get_env_size(env));
-	e.path = get_env(env);
+	environ = ft_array_str_cpy(env, environ);
+	e.path = get_env(environ);
 	while (42)
 	{
 		e.error == 0 ? ft_printf("🚀  > ") : ft_printf("💥  > ");
@@ -64,7 +43,6 @@ int main(int ac, char **argv, char **env)
 		if (e.nbarg > 0 && is_bull(e.cmd, &e, environ) == 1)
 			cmd(&e, environ);
 		free(buffer);
-		reconstruct_env(&e, env);
 	}
 	return (0);
 }

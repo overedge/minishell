@@ -6,7 +6,7 @@
 /*   By: nahmed-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 10:23:40 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/15 16:59:15 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/16 15:07:50 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void parse_user(char *buffer, t_env *e)
 	if (i > 0)
 	{
 		e->cmd = ft_strdup(cli[0]);
-		e->args = ft_array_str_cpy(cli, e->args, e->nbarg);
+		e->args = ft_array_str_cpy(cli, e->args);
 		free(cli);
 	}
 	i = 0;
