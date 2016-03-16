@@ -6,7 +6,7 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 19:03:33 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/16 15:42:00 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/16 18:36:20 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 char *get_env(char **env)
 {
 	int		i;
-	i = 0;
 
+	i = 0;
 	while (env[i])
 	{
 		if ((env[i] = ft_strnstr(env[i], "PATH=", 5)) != NULL)
@@ -32,7 +32,7 @@ int main(int ac, char **argv, char **env)
 	t_env	e;
 	char	**environ = NULL;
 
-	ft_memset(&e, 0, sizeof(e));
+//	ft_memset(&e, 0, sizeof(e));
 	environ = ft_array_str_cpy(env, environ);
 	e.path = get_env(environ);
 	while (42)
