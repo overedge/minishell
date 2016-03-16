@@ -6,7 +6,7 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 23:46:52 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/16 19:00:47 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/16 20:16:39 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,14 @@
 
 void	ft_setenv(t_env *e, char **env)
 {
-	ft_printf("Je suis la commande : %s et jai %d args\n", e->cmd, e->nbarg - 1);
+	if (e->nbarg == 1)
+		ft_env(e, env);
+	else if (e->nbarg == 2)
+		env = ft_array_realloc(env, e->args[1], NULL);
+	else if (e->nbarg == 3)
+		env = ft_array_realloc(env, e->args[1], e->args[2]);
+	else
+		error("setenv", "Too many arguments.", e);
 }
 
 void	ft_unsetenv(t_env *e, char **env)

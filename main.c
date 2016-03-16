@@ -6,7 +6,7 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 19:03:33 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/16 18:36:20 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/16 19:49:49 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int main(int ac, char **argv, char **env)
 	t_env	e;
 	char	**environ = NULL;
 
-//	ft_memset(&e, 0, sizeof(e));
-	environ = ft_array_str_cpy(env, environ);
-	e.path = get_env(environ);
+	ft_memset(&e, 0, sizeof(e));
 	while (42)
 	{
+		environ = ft_array_str_cpy(env, environ);
+		e.path = get_env(environ);
 		e.error == 0 ? ft_printf("🚀  > ") : ft_printf("💥  > ");
 		get_next_line(0, &buffer);
 		parse_user(buffer, &e);

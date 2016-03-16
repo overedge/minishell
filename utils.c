@@ -6,7 +6,7 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 00:05:43 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/16 18:53:27 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/16 20:17:42 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,32 @@ char **ft_array_str_cpy(char **src, char **dest)
 		ft_strcpy(dest[i], src[i]);
 		i++;
 	}
+	dest[i] = NULL;
+	return (dest);
+}
+
+char **ft_array_realloc(char **src, char *key, char *value)
+{
+	int		i;
+	int		size;
+	char	**dest;
+
+	size = 0;
+	i = 0;
+	while (src[size])
+		size++;
+	dest = (char**)malloc(sizeof(char*) * size + 2);
+	while (i < size)
+	{
+		dest[i] = (char*)malloc(sizeof(char) * ft_strlen(src[i]) + 1);
+		ft_strcpy(dest[i], src[i]);
+		i++;
+	}
+	if (value)
+		dest[i] = ft_strjoin(ft_strjoin(key, "="), value);
+	else
+		dest[i] = ft_strjoin(key, "=");
+	i++;
 	dest[i] = NULL;
 	return (dest);
 }
