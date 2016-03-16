@@ -6,7 +6,7 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 19:03:42 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/15 18:53:30 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/16 00:55:39 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -26,6 +26,12 @@ typedef struct s_env
 	char error;
 }				t_env;
 
+typedef struct s_bull
+{
+	char		*code;
+	void		(*f)(t_env *e, char **env);
+}				t_bull;
+
 /*
 ** Parser
 */
@@ -41,4 +47,14 @@ char	*cjoin(char *tmp, char *tmp2);
 **	CLI
 */
 void	cmd(t_env *e, char **env);
+
+/*
+**	Bull
+*/
+int		is_bull(char *cmd, t_env *e, char **env);
+void	cd(t_env *e, char **env);
+void	ft_setenv(t_env *e, char **env);
+void	ft_unsetenv(t_env *e, char **env);
+void	ft_env(t_env *e, char **env);
+void	ft_exit(t_env *e, char **env);
 #endif

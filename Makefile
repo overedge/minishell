@@ -6,11 +6,11 @@
 #    By: nahmed-m <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/03 19:34:07 by nahmed-m          #+#    #+#              #
-#*   Updated: 2016/03/14 00:05:39 by nahmed-m         ###   ########.fr       *#
+#*   Updated: 2016/03/16 00:41:50 by nahmed-m         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
-SRC_NAME = main.c utils.c parsing.c cmd.c
+SRC_NAME = main.c utils.c parsing.c cmd.c bull.c
 
 NAME = minishell
 
