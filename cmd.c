@@ -6,7 +6,7 @@
 /*   By: nahmed-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 10:49:43 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/15 23:46:48 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/16 01:58:48 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	cmd(t_env *e, char **env)
 	char	**try;
 	int		i;
 	pid_t	father;
+	char *binname;
 
 	i = 0;
 	try = ft_strsplit(e->path, ':');
@@ -25,7 +26,11 @@ void	cmd(t_env *e, char **env)
 	{
 		while (i < e->nbrpath)
 		{
-			if (execve(cjoin(try[i], cjoin("/", e->cmd)), e->args, env) == -1)
+			if (e->cmd[0] != '/' || e->cmd[0] != '.')
+				binname = cjoin(try[i], cjoin("/", e->cmd));
+			else
+				binname = e->cmd;
+			if (execve(binname, e->args, env) == -1)
 				;
 			else
 			{

@@ -6,7 +6,7 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 19:03:33 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/16 01:01:04 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/16 02:05:24 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int main(int ac, char **argv, char **env)
 		if (e.nbarg > 0 && is_bull(e.cmd, &e, environ) == 1)
 			cmd(&e, environ);
 		free(buffer);
-	//	reconstruct_env(&e, env);
+		reconstruct_env(&e, env);
 	}
 	return (0);
 }

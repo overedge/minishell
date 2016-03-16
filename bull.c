@@ -6,7 +6,7 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 23:46:52 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/16 01:01:03 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/16 02:13:10 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_env(t_env *e, char **env)
 
 void	ft_exit(t_env *e, char **env)
 {
-	exit(EXIT_SUCCESS);
+	exit(1);
 }
 
 int is_bull(char *cmd, t_env *e, char **env)
@@ -55,7 +55,7 @@ int is_bull(char *cmd, t_env *e, char **env)
 	{"env", &ft_env}, \
 	{"exit", &ft_exit}};
 	
-	while (i <= 4)
+	while (i < 5)
 	{
 		if (ft_strcmp(ptr_bull[i].code, cmd) == 0)
 		{
