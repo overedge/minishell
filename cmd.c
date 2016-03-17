@@ -6,13 +6,13 @@
 /*   By: nahmed-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 10:49:43 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/16 15:30:02 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/17 00:03:01 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	cmd(t_env *e, char **env)
+void	cmd(t_env *e)
 {
 	char	**try;
 	int		i;
@@ -30,7 +30,7 @@ void	cmd(t_env *e, char **env)
 				binname = cjoin(try[i], cjoin("/", e->cmd));
 			else
 				binname = e->cmd;
-			if (execve(binname, e->args, env) == -1)
+			if (execve(binname, e->args, e->env) == -1)
 				;
 			else
 			{

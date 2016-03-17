@@ -6,7 +6,7 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 00:05:43 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/16 20:17:42 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/17 01:15:09 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,20 @@ char **ft_array_str_cpy(char **src, char **dest)
 	return (dest);
 }
 
-char **ft_array_realloc(char **src, char *key, char *value)
+static int key_exist(char **src, char *key)
+{
+	int		i;
+
+	while (src[i])
+	{
+		if (ft_strnstr(src[i], cjoin(key, "="), ft_strlen(key) + 1) != NULL)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+static char **edit_key(char **src, char *key, char *value)
 {
 	int		i;
 	int		size;
@@ -54,20 +67,55 @@ char **ft_array_realloc(char **src, char *key, char *value)
 	i = 0;
 	while (src[size])
 		size++;
-	dest = (char**)malloc(sizeof(char*) * size + 2);
+	dest = (char**)malloc(size + 2);
 	while (i < size)
 	{
-		dest[i] = (char*)malloc(sizeof(char) * ft_strlen(src[i]) + 1);
-		ft_strcpy(dest[i], src[i]);
+		if (ft_strnstr(src[i], cjoin(key, "="), ft_strlen(key) + 1)  == NULL)
+		{
+			dest[i] = (char*)malloc(sizeof(char) * ft_strlen(src[i]) + 1);
+			ft_strcpy(dest[i], src[i]);
+		}
+		else
+		{
+			if (value)
+				dest[i] = ft_strjoin(ft_strjoin(key, "="), value);
+			else
+				dest[i] = ft_strjoin(key, "=");
+		}
 		i++;
 	}
-	if (value)
-		dest[i] = ft_strjoin(ft_strjoin(key, "="), value);
-	else
-		dest[i] = ft_strjoin(key, "=");
 	i++;
 	dest[i] = NULL;
 	return (dest);
+}
+
+char **ft_array_realloc(char **src, char *key, char *value)
+{
+	int		i;
+	int		size;
+	char	**dest;
+
+	size = 0;
+	i = 0;
+	if (key_exist(src, key) == 0)
+	{
+		while (src[size])
+			size++;
+		dest = (char**)malloc(sizeof(char*) * size + 2);
+		while (i < size)
+		{
+			dest[i] = (char*)malloc(sizeof(char) * ft_strlen(src[i]) + 1);
+			ft_strcpy(dest[i], src[i]);
+			i++;
+		}
+		if (value)
+			dest[i] = ft_strjoin(ft_strjoin(key, "="), value);
+		else
+			dest[i] = ft_strjoin(key, "=");
+		dest[++i] = NULL;
+		return (dest);
+	}
+	return (edit_key(src, key, value));
 }
 
 char *cjoin(char *tmp, char *tmp2)
@@ -90,7 +138,7 @@ char *get_home(char **env)
 	while (env[i])
 	{
 		if ((env[i] = ft_strnstr(env[i], "HOME=", 5)) != NULL)
-			return (ft_strsplit(env[i], '=')[1]);
+			return (ft_strdup(ft_strsplit(env[i], '=')[1]));
 		i++;
 	}
 	return (NULL);
@@ -104,7 +152,7 @@ char *get_pwd(char **env)
 	while (env[i])
 	{
 		if ((env[i] = ft_strnstr(env[i], "PWD=", 4)) != NULL)
-			return (ft_strsplit(env[i], '=')[1]);
+			return (ft_strdup(ft_strsplit(env[i], '=')[1]));
 		i++;
 	}
 	return (NULL);

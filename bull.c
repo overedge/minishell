@@ -6,66 +6,62 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 23:46:52 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/16 20:16:39 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/17 00:50:04 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_setenv(t_env *e, char **env)
+void	ft_setenv(t_env *e)
 {
 	if (e->nbarg == 1)
-		ft_env(e, env);
+		ft_env(e);
 	else if (e->nbarg == 2)
-		env = ft_array_realloc(env, e->args[1], NULL);
+		e->env = ft_array_realloc(e->env, e->args[1], NULL);
 	else if (e->nbarg == 3)
-		env = ft_array_realloc(env, e->args[1], e->args[2]);
+		e->env = ft_array_realloc(e->env, e->args[1], e->args[2]);
 	else
-		error("setenv", "Too many arguments.", e);
+		error("setenv", "Too many arguments. ", e);
 }
 
-void	ft_unsetenv(t_env *e, char **env)
+void	ft_unsetenv(t_env *e)
 {
 	ft_printf("Je suis la commande : %s et jai %d args\n", e->cmd, e->nbarg - 1);
 }
 
-void	ft_env(t_env *e, char **env)
+void	ft_env(t_env *e)
 {
 	int		i;
 
 	i = 0;
-	while (env[i])
+	while (e->env[i])
 	{
-		ft_printf("%s\n", env[i]);
+		ft_printf("%s\n", e->env[i]);
 		i++;
 	}
 }
 
-void	ft_exit(t_env *e, char **env)
+void	ft_exit()
 {
 	exit(EXIT_SUCCESS);
 }
 
-int is_bull(char *cmd, t_env *e, char **env)
+int is_bull(char *cmd, t_env *e)
 {
 	int		i;
 
 	i = 0;
-	t_bull ptr_bull[5] = {{"cd", &cd}, \
-	{"exit", &ft_exit}, \
-	{"setenv", &ft_setenv}, \
-	{"unsetenv", &ft_unsetenv}, \
-	{"env", &ft_env}};
-	
-	while (i < 5)
-	{
-		if (ft_strcmp(ptr_bull[i].code, cmd) == 0)
-		{
-			ptr_bull[i].f(e, env);
-			e->error = 0;
-			return (0);
-		}
-		i++;
-	}
-	return (1);
+	if (ft_strcmp("cd", cmd) == 0)
+		cd(e);
+	else if (ft_strcmp("setenv", cmd) == 0)
+		ft_setenv(e);
+	else if (ft_strcmp("env", cmd) == 0)
+		ft_env(e);
+	else if (ft_strcmp("exit", cmd) == 0)
+		ft_exit();
+	else if (ft_strcmp("unsetenv", cmd) == 0)
+		ft_unsetenv(e);
+	else
+		return (1);
+	return (0);
 }
