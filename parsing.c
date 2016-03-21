@@ -6,11 +6,16 @@
 /*   By: nahmed-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 10:23:40 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/16 23:29:52 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/21 18:53:48 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void parse_all_cmds(char *buffer, t_env *e)
+{
+
+}
 
 void parse_user(char *buffer, t_env *e)
 {

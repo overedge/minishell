@@ -6,7 +6,7 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 19:03:33 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/20 18:26:23 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/21 18:49:22 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,32 @@ static void del_tab(char *buffer)
 	}
 }
 
+static void no_quit(int sig)
+{
+	if (sig == 2)
+	{
+		ft_putchar('\n');
+		ft_printf("$> ");
+	}
+}
+
 int main(int ac, char **argv, char **env)
 {
 	char	*buffer;
 	t_env	e;
-	
+
 	ac = ac + (int)argv;
 	ft_memset(&e, 0, sizeof(e));
 	e.env = ft_array_str_cpy(env, e.env);
+	signal(SIGINT, no_quit);
 	while (42)
 	{
 		e.path = get_env(e.env);
-		e.error == 0 ? ft_printf("🚀  > ") : ft_printf("💥  > ");
+		ft_printf("$> ");
 		get_next_line(0, &buffer);
 		del_tab(buffer);
+		if (ft_strstr(buffer, ";") != NULL)
+			parse_all_cmds(buffer, &e);
 		parse_user(buffer, &e);
 		if (e.nbarg > 0 && is_bull(e.cmd, &e) == 1)
 			cmd(&e);

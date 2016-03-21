@@ -6,7 +6,7 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 00:05:43 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/20 20:56:26 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/21 16:43:28 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char **ft_array_str_cpy(char **src, char **dest)
 	i = 0;
 	while (src[size])
 		size++;
-	dest = (char**)malloc(sizeof(char*) * size + 1);
+	dest = (char**)malloc(sizeof(char*) * (size + 1));
 	while (i < size)
 	{
 		dest[i] = (char*)malloc(sizeof(char) * ft_strlen(src[i]) + 1);
@@ -68,7 +68,7 @@ static char **edit_key(char **src, char *key, char *value)
 	i = 0;
 	while (src[size])
 		size++;
-	dest = (char**)malloc(sizeof(char*) * 1000);
+	dest = (char**)malloc(sizeof(char*) * (size + 1));
 	while (i < size)
 	{
 		if (ft_strnstr(src[i], cjoin(key, "="), ft_strlen(key) + 1)  == NULL)
@@ -80,8 +80,7 @@ static char **edit_key(char **src, char *key, char *value)
 			dest[i] = ft_strjoin(ft_strjoin(key, "="), value);
 		i++;
 	}
-	i++;
-	dest[i] = NULL;
+	dest[++i] = NULL;
 	free(src);
 	return (dest);
 }
@@ -98,10 +97,10 @@ char **ft_array_realloc(char **src, char *key, char *value)
 	{
 		while (src[size])
 			size++;
-		dest = (char**)malloc(sizeof(char*) * 1000);
+		dest = (char**)malloc(sizeof(char*) * (size + 3));
 		while (i < size)
 		{
-			dest[i] = (char*)malloc(sizeof(char) * ft_strlen(src[i]));
+			dest[i] = (char*)malloc(sizeof(char) * ft_strlen(src[i]) + 1);
 			ft_strcpy(dest[i], src[i]);
 			i++;
 		}
@@ -130,7 +129,7 @@ char	**ft_array_unset(char **src, char *key)
 	{
 		while (src[size])
 			size++;
-		dest = (char**)malloc(sizeof(char *) * 1000);
+		dest = (char**)malloc(sizeof(char *) * (size + 1));
 		while (i < size)
 		{
 			if (ft_strnstr(src[i], cjoin(key, "="), ft_strlen(key) + 1) == NULL)

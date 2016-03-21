@@ -6,7 +6,7 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 19:03:42 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/20 15:36:29 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/21 18:49:16 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -33,6 +33,7 @@ typedef struct s_env
 */
 char	*get_env(char **env);
 void	parse_user(char *buffer, t_env *e);
+void	parse_all_cmds(char *buffer, t_env *e);
 /*
 ** Utils
 */
