@@ -6,7 +6,7 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 23:46:52 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/17 00:50:04 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/20 18:59:33 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,19 @@ void	ft_setenv(t_env *e)
 
 void	ft_unsetenv(t_env *e)
 {
-	ft_printf("Je suis la commande : %s et jai %d args\n", e->cmd, e->nbarg - 1);
+	int		i;
+
+	i = 1;
+	if (e->nbarg == 1)
+		error("unsetenv", "Too few arguments. ", e);
+	else
+	{
+		while (i < e->nbarg)
+		{
+			e->env = ft_array_unset(e->env, e->args[i]);
+			i++;
+		}
+	}
 }
 
 void	ft_env(t_env *e)

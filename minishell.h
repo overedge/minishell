@@ -6,7 +6,7 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 19:03:42 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/17 00:07:32 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/20 15:36:29 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef MINISHELL_H
@@ -41,8 +41,8 @@ char	**ft_array_realloc(char **src, char *key, char *value);
 char	*cjoin(char *tmp, char *tmp2);
 char	*get_home(char **env);
 char	*get_env(char **env);
-char	*get_pwd(char **env);
 char	**ft_array_str_cpy(char **src, char **dest);
+char	**ft_array_unset(char **src, char *key);
 /*
 **	CLI
 */

@@ -6,7 +6,7 @@
 #    By: nahmed-m <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/03 19:34:07 by nahmed-m          #+#    #+#              #
-#*   Updated: 2016/03/16 18:59:58 by nahmed-m         ###   ########.fr       *#
+#*   Updated: 2016/03/20 15:47:08 by nahmed-m         ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJ_NAME = $(SRC_NAME:.c=.o)
 $(NAME) :
 	@make fclean -C libft/ && make -C libft/
 	@cp libft/libft.a .
-	@gcc -c $(SRC_NAME)
+	@gcc -c -Wall -Werror -Wextra $(SRC_NAME)
 	@gcc $(OBJ_NAME) -o $(NAME) -L. -lft
 	@echo "\033[1;34m --minishell-- :\033[m \033[1;32m DONE !\033[m"
 

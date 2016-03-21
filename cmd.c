@@ -6,7 +6,7 @@
 /*   By: nahmed-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 10:49:43 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/17 00:03:01 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/19 21:26:29 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	cmd(t_env *e)
 	{
 		while (i < e->nbrpath)
 		{
-			if (e->cmd[0] != '/' || e->cmd[0] != '.')
+			if (e->cmd[0] != '/' && e->cmd[0] != '.')
 				binname = cjoin(try[i], cjoin("/", e->cmd));
 			else
 				binname = e->cmd;
