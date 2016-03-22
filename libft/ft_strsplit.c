@@ -6,7 +6,7 @@
 /*   By: nahmed-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/30 04:26:36 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/15 14:28:42 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/22 14:27:42 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int		ft_count_part(const char *s, char c)
 	instring = 0;
 	while (*s != '\0')
 	{
-		if (instring == 1 && (*s == c ||(c == ' ' && *s == '\t')))
+		if (instring == 1 && (*s == c || (c == ' ' && *s == '\t')))
 			instring = 0;
 		if (instring == 0 && *s != c)
 		{

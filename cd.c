@@ -6,13 +6,32 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 18:59:28 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/19 19:18:50 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/22 14:52:46 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void basic_cd(t_env *e, char *pwd)
+static void	cd_abs(t_env *e, char *pwd)
+{
+	char *freeme;
+
+	freeme = malloc(sizeof(char) * 200);
+	if (pwd)
+	{
+		if (chdir(cjoin(cjoin(pwd, "/"), e->args[1])) == -1)
+			error(e->args[1], "cd: no such file or directory ", e);
+		else
+		{
+			getcwd(freeme, 200);
+			e->env = ft_array_realloc(e->env, "OLDPWD", pwd);
+			e->env = ft_array_realloc(e->env, "PWD", freeme);
+		}
+		free(pwd);
+	}
+}
+
+static void	basic_cd(t_env *e, char *pwd)
 {
 	char *freeme;
 
@@ -29,23 +48,10 @@ static void basic_cd(t_env *e, char *pwd)
 		}
 	}
 	else
-	{
-		if (pwd)
-		{
-			if (chdir(cjoin(cjoin(pwd, "/"), e->args[1])) == -1)
-				error(e->args[1], "cd: no such file or directory ", e);
-			else
-			{
-				getcwd(freeme, 200);
-				e->env = ft_array_realloc(e->env, "OLDPWD", pwd);
-				e->env = ft_array_realloc(e->env, "PWD", freeme);
-			}
-			free(pwd);
-		}
-	}
+		cd_abs(e, pwd);
 }
 
-void	cd(t_env *e)
+void		cd(t_env *e)
 {
 	char *home;
 	char *pwd;
@@ -70,8 +76,6 @@ void	cd(t_env *e)
 		else
 			error(NULL, "cd : No home directory.\n", e);
 	}
-	else if (e->nbarg == 2)
-		basic_cd(e, pwd);
-	else if (e->nbarg > 2)
-		error(e->args[1], "cd: string not in pwd ", e);
+	e->nbarg == 2 ? basic_cd(e, pwd) : 0;
+	e->nbarg > 2 ? error(e->args[1], "cd: string not in pwd ", e) : 0;
 }

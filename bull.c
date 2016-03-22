@@ -6,7 +6,7 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 23:46:52 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/20 18:59:33 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/22 14:47:06 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,17 @@ void	ft_env(t_env *e)
 	}
 }
 
-void	ft_exit()
+void	ft_exit(t_env *e)
 {
-	exit(EXIT_SUCCESS);
+	if (e->nbarg == 1)
+		exit(0);
+	else if (e->nbarg == 2)
+		exit(ft_atoi(e->args[1]));
+	else
+		error("exit", "Too many arguments. ", e);
 }
 
-int is_bull(char *cmd, t_env *e)
+int		is_bull(char *cmd, t_env *e)
 {
 	int		i;
 
@@ -70,7 +75,7 @@ int is_bull(char *cmd, t_env *e)
 	else if (ft_strcmp("env", cmd) == 0)
 		ft_env(e);
 	else if (ft_strcmp("exit", cmd) == 0)
-		ft_exit();
+		ft_exit(e);
 	else if (ft_strcmp("unsetenv", cmd) == 0)
 		ft_unsetenv(e);
 	else

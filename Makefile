@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRC_NAME = main.c utils.c parsing.c cmd.c bull.c cd.c
+SRC_NAME = main.c utils.c parsing.c cmd.c bull.c cd.c array.c
 
 NAME = minishell
 

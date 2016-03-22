@@ -1,0 +1,7 @@
+ls
+ls -l
+env
+unsetnev PATH
+ls
+env
+cd /
