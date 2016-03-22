@@ -6,7 +6,7 @@
 /*   By: nahmed-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 14:40:13 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/22 16:07:16 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/22 23:36:37 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ static char	**edit_key(char **src, char *key, char *value)
 	int		i;
 	int		size;
 	char	**dest;
-	
+
 	size = 0;
 	i = 0;
 	while (src[size])
 		size++;
-	dest = (char**)malloc(sizeof(char*) * (size + 1000));
-	while (i < size)
+	dest = (char**)malloc(sizeof(char*) * (size + 1));
+	while (src[i])
 	{
-	ft_printf("Ce dangereux cas");
+		ft_printf("life : %s\n", src[i]);
 		if (ft_strnstr(src[i], cjoin(key, "="), ft_strlen(key) + 1) == NULL)
 		{
 			dest[i] = (char*)malloc(sizeof(char) * ft_strlen(src[i]) + 1);
@@ -35,7 +35,8 @@ static char	**edit_key(char **src, char *key, char *value)
 			dest[i] = ft_strjoin(ft_strjoin(key, "="), value);
 		i++;
 	}
-	dest[++i] = NULL;
+	ft_printf("FINISH !!!!!!!!!!!!!!!\n");
+	dest[i] = NULL;
 	free(src);
 	return (dest);
 }
@@ -76,20 +77,20 @@ char		**ft_array_unset(char **src, char *key)
 	{
 		while (src[size])
 			size++;
-		dest = (char**)malloc(sizeof(char *) * (size + 1000));
-		while (i < size)
+		dest = (char**)malloc(sizeof(char *) * (size));
+		while (src[i])
 		{
 			if (ft_strnstr(src[i], cjoin(key, "="), ft_strlen(key) + 1) == NULL)
 			{
-				dest[swp] = (char*)malloc(sizeof(char) * ft_strlen(src[i]));
+				dest[swp] = (char*)malloc(sizeof(char) * ft_strlen(src[i]) + 1);
 				ft_strcpy(dest[swp], src[i]);
 			}
 			else
 				swp--;
-			swp++;
 			i++;
+			swp++;
 		}
-		dest[++swp] = NULL;
+		dest[+swp] = NULL;
 		free(src);
 		return (dest);
 	}
@@ -108,7 +109,7 @@ char		**ft_array_realloc(char **src, char *key, char *value)
 	{
 		while (src[size])
 			size++;
-		dest = (char**)malloc(sizeof(char*) * (size + 1000));
+		dest = (char**)malloc(sizeof(char*) * (size + 2));
 		while (i < size)
 		{
 			dest[i] = (char*)malloc(sizeof(char) * ft_strlen(src[i]) + 1);
