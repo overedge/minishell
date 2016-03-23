@@ -1,8 +1,8 @@
 Implementation of unix's CLI command for OS X without all Built-in commands just :
-cd
-env
-setenv
-unsetenv
+cd,
+env,
+setenv,
+unsetenv,
 
 ### Minishell 
 ![Image of ft_ls](https://github.com/overedge/minishell/blob/master/cli.png)
