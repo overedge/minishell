@@ -15,5 +15,5 @@ $ make clean
 $ ./ft_ls [-Flags -l -a -r -R -t (-c -e for color or emojii)] [...path]
 ```
 ### Result 
-![Image of Result](https://github.com/overedge/libft_backup/blob/master/result.png?raw=true)
+![Image of Result](https://github.com/overedge/minishell/blob/master/result.png)
 
