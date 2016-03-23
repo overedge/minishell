@@ -5,7 +5,7 @@ setenv
 unsetenv
 
 ### Minishell 
-![Image of ft_ls](https://github.com/overedge/minishell)
+![Image of ft_ls](https://github.com/overedge/minishell/blob/master/cli.png)
 ### Installation
 
 ```sh
