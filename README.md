@@ -9,7 +9,7 @@ unsetenv
 ### Installation
 
 ```sh
-$ git clone https://github.com/overedge/FT_LS.git FT_LS
+$ git clone https://github.com/overedge/minishell minishell
 $ cd minishell
 $ make
 $ make clean
