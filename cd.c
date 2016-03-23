@@ -6,7 +6,7 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/16 18:59:28 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/22 14:52:46 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/23 14:54:19 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		cd(t_env *e)
 
 	pwd = malloc(sizeof(char) * 200);
 	pwd = getcwd(pwd, 200);
-	if (e->nbarg == 1)
+	if (e->nbarg == 1 || (e->nbarg == 2 && ft_strcmp(e->args[1], "~") == 0))
 	{
 		home = get_home(e->env);
 		if (home)
@@ -71,11 +71,11 @@ void		cd(t_env *e)
 				pwd = getcwd(pwd, 200);
 				e->env = ft_array_realloc(e->env, "PWD", pwd);
 			}
-			free(home);
 		}
 		else
 			error(NULL, "cd : No home directory.\n", e);
 	}
-	e->nbarg == 2 ? basic_cd(e, pwd) : 0;
+	else if (e->nbarg == 2)
+		e->nbarg == 2 ? basic_cd(e, pwd) : 0;
 	e->nbarg > 2 ? error(e->args[1], "cd: string not in pwd ", e) : 0;
 }

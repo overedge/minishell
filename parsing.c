@@ -6,16 +6,46 @@
 /*   By: nahmed-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/15 10:23:40 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/22 14:54:02 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/23 15:53:15 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//static void	parse_all_cmds(char *buffer, t_env *e)
-//{
-//
-//}
+static void		parse_buffer(char *buffer, t_env *e)
+{
+	int		i;
+
+	e->cmds = ft_strsplit(buffer, ';');
+	i = 0;
+	while (e->cmds[i])
+		i++;
+	e->nbcmd = i;
+}
+
+void			parse_all_cmds(char *buffer, t_env *e)
+{
+	int		i;
+	int		selector;
+
+	i = 0;
+	selector = 0;
+	while (buffer[i])
+	{
+		if (buffer[i] == ';' && buffer[i + 1])
+			selector++;
+		i++;
+	}
+	if (selector == 0)
+	{
+		e->nbcmd = 1;
+		e->cmds = malloc(sizeof(char *) * 2);
+		e->cmds[0] = buffer;
+		e->cmds[1] = NULL;
+	}
+	else
+		parse_buffer(buffer, e);
+}
 
 void			parse_user(char *buffer, t_env *e)
 {

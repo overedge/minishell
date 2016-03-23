@@ -6,7 +6,7 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/14 00:05:43 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/22 20:30:17 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/23 14:45:07 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,30 @@ char		*get_home(char **env)
 		i++;
 	}
 	return (NULL);
+}
+
+char		**ft_unset_elem(char **src, char *key, int size)
+{
+	char	**dest;
+	int		i;
+	int		swp;
+
+	i = 0;
+	swp = 0;
+	dest = (char**)malloc(sizeof(char *) * (size));
+	while (src[i])
+	{
+		if (ft_strnstr(src[i], cjoin(key, "="), ft_strlen(key) + 1) == NULL)
+		{
+			dest[swp] = (char*)malloc(sizeof(char) * ft_strlen(src[i]) + 1);
+			ft_strcpy(dest[swp], src[i]);
+		}
+		else
+			swp--;
+		i++;
+		swp++;
+	}
+	dest[+swp] = NULL;
+	free(src);
+	return (dest);
 }

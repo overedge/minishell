@@ -6,7 +6,7 @@
 /*   By: nahmed-m <nahmed-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/13 19:03:42 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/22 14:30:30 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/23 15:07:50 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct		s_env
+typedef struct	s_env
 {
 	char		*path;
 	int			nbrpath;
@@ -25,13 +25,16 @@ typedef struct		s_env
 	int			nbarg;
 	char		error;
 	char		**env;
-}					t_env;
+	int			nbcmd;
+	char		**cmds;
+}				t_env;
 
 /*
 ** Parser
 */
 char			*get_env(char **env);
 void			parse_user(char *buffer, t_env *e);
+void			parse_all_cmds(char *buffer, t_env *e);
 /*
 ** Utils
 */
@@ -42,6 +45,7 @@ char			*get_home(char **env);
 char			*get_env(char **env);
 char			**ft_array_str_cpy(char **src, char **dest);
 char			**ft_array_unset(char **src, char *key);
+char			**ft_unset_elem(char **src, char *key, int size);
 /*
 **	CLI
 */

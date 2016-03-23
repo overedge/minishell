@@ -6,7 +6,7 @@
 /*   By: nahmed-m <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/22 14:40:13 by nahmed-m          #+#    #+#             */
-/*   Updated: 2016/03/22 23:36:37 by nahmed-m         ###   ########.fr       */
+/*   Updated: 2016/03/23 14:34:30 by nahmed-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static char	**edit_key(char **src, char *key, char *value)
 	dest = (char**)malloc(sizeof(char*) * (size + 1));
 	while (src[i])
 	{
-		ft_printf("life : %s\n", src[i]);
 		if (ft_strnstr(src[i], cjoin(key, "="), ft_strlen(key) + 1) == NULL)
 		{
 			dest[i] = (char*)malloc(sizeof(char) * ft_strlen(src[i]) + 1);
@@ -35,7 +34,6 @@ static char	**edit_key(char **src, char *key, char *value)
 			dest[i] = ft_strjoin(ft_strjoin(key, "="), value);
 		i++;
 	}
-	ft_printf("FINISH !!!!!!!!!!!!!!!\n");
 	dest[i] = NULL;
 	free(src);
 	return (dest);
@@ -65,34 +63,14 @@ static int	key_exist(char **src, char *key)
 
 char		**ft_array_unset(char **src, char *key)
 {
-	char	**dest;
 	int		size;
-	int		i;
-	int		swp;
 
-	swp = 0;
 	size = 0;
-	i = 0;
 	if (key_exist(src, key) == 1)
 	{
 		while (src[size])
 			size++;
-		dest = (char**)malloc(sizeof(char *) * (size));
-		while (src[i])
-		{
-			if (ft_strnstr(src[i], cjoin(key, "="), ft_strlen(key) + 1) == NULL)
-			{
-				dest[swp] = (char*)malloc(sizeof(char) * ft_strlen(src[i]) + 1);
-				ft_strcpy(dest[swp], src[i]);
-			}
-			else
-				swp--;
-			i++;
-			swp++;
-		}
-		dest[+swp] = NULL;
-		free(src);
-		return (dest);
+		return (ft_unset_elem(src, key, size));
 	}
 	return (src);
 }
@@ -116,12 +94,8 @@ char		**ft_array_realloc(char **src, char *key, char *value)
 			ft_strcpy(dest[i], src[i]);
 			i++;
 		}
-		//value ? (dest[i] = ft_strjoin(ft_strjoin(key, "="), value)) :
-		//	(dest[i] = ft_strjoin(key, "="));
-		if (value)
-			dest[i] = ft_strjoin(ft_strjoin(key, "="), value);
-		else
-			dest[i] = ft_strjoin(key, "=");
+		value ? (dest[i] = ft_strjoin(ft_strjoin(key, "="), value)) :
+			(dest[i] = ft_strjoin(key, "="));
 		dest[++i] = NULL;
 		free(src);
 		return (dest);
